@@ -44,8 +44,9 @@
             }else{
               jewel.load("scripts/board.js");
             }
-            jewel.load("scripts/screen.game.js")
-            jewel.load("scripts/display.canvas.js")
+            jewel.load("scripts/screen.game.js");
+            jewel.load("scripts/display.canvas.js");
+            jewel.load("scripts/input.js");
           }else{
             jewel.load("scripts/screen.install.js",jewel.setup);
           }
@@ -57,7 +58,7 @@
 <body>
   <div id="game">
     <div class="screen" id="splash-screen">
-      <h1 class="logo">Jewel <br/> Sacks </h1>
+      <h1 class="logo">Super Jewel <br/> Bros</h1>
       <div class="progress">
         <div class="indicator"></div>
       </div>
@@ -67,7 +68,7 @@
     </div>
 
     <div class="screen" id="install-screen">
-      <h1 class="logo">Jewel <br/>Sacks</h1>
+      <h1 class="logo">Super Jewel <br/>Bros</h1>
       <span>
           Click the <img src="images/install-icon.png"
                          alt="Install icon">
@@ -76,7 +77,7 @@
    </div>
 
     <div class="screen" id="main-menu">
-      <h2 class="logo">Jewel </br> Sacks </h2>
+      <h3 class="logo">Super Jewel</br> Bros </h3>
       <ul class="menu">
         <li><button name="game-screen">Play</button>
         <li><button name="high-scores">Highscore</button>
