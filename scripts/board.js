@@ -93,7 +93,7 @@ jewel.board = (function() {
         jewels[x1][y1] = type2;
         jewels[x2][y2] = type1;
 
-        chain = (checkChain(x2, y2) > 2 || 
+        chain = (checkChain(x2, y2) > 2 ||
                  checkChain(x1, y1) > 2);
 
         // swap back
@@ -125,7 +125,7 @@ jewel.board = (function() {
     }
 
     function check(events) {
-        var chains = getChains(), 
+        var chains = getChains(),
             hadChains = false, score = 0,
             removed = [], moved = [], gaps = [],
             x, y;
@@ -199,24 +199,42 @@ jewel.board = (function() {
     // if possible, swaps (x1,y1) and (x2,y2) and
     // calls the callback function with list of board events
     function swap(x1, y1, x2, y2, callback) {
-        var tmp,
-            events;
-
-        if (canSwap(x1, y1, x2, y2)) {
-
-            // swap the jewels
-            tmp = getJewel(x1, y1);
-            jewels[x1][y1] = getJewel(x2, y2);
-            jewels[x2][y2] = tmp;
-
-            // check the board and get list of events
-            events = check();
-
+        var tmp, swap1, swap2,
+            events = [];
+        swap1 = {
+            type : "move",
+            data : [{
+                type : getJewel(x1, y1),
+                fromX : x1, fromY : y1, toX : x2, toY : y2
+            },{
+                type : getJewel(x2, y2),
+                fromX : x2, fromY : y2, toX : x1, toY : y1
+            }]
+        };
+        swap2 = {
+            type : "move",
+            data : [{
+                type : getJewel(x2, y2),
+                fromX : x1, fromY : y1, toX : x2, toY : y2
+            },{
+                type : getJewel(x1, y1),
+                fromX : x2, fromY : y2, toX : x1, toY : y1
+            }]
+        };
+        if (isAdjacent(x1, y1, x2, y2)) {
+            events.push(swap1);
+            if (canSwap(x1, y1, x2, y2)) {
+                tmp = getJewel(x1, y1);
+                jewels[x1][y1] = getJewel(x2, y2);
+                jewels[x2][y2] = tmp;
+                events = events.concat(check());
+            } else {
+                events.push(swap2, {type : "badswap"});
+            }
             callback(events);
-        } else {
-            callback(false);
         }
     }
+
 
     // returns true if at least one match can be made
     function hasMoves() {
@@ -230,7 +248,7 @@ jewel.board = (function() {
         return false;
     }
 
-    // returns true if (x,y) is a valid position and if 
+    // returns true if (x,y) is a valid position and if
     // the jewel at (x,y) can be swapped with a neighbor
     function canJewelMove(x, y) {
         return ((x > 0 && canSwap(x, y, x-1 , y)) ||

@@ -141,6 +141,10 @@ ul.menu li button:active {
     position : relative;
     width : 8em;
     height : 8em;
+    perspective: 16em;
+    -webkit-perspective: 16em;
+    -moz-perspective: 16em;
+    -ms-perspective: 16em;
 }
 
 #game-screen .game-board .board-bg,
@@ -207,4 +211,72 @@ ul.menu li button:active {
 }
 #game-screen footer button.pause {
     float: right;
+}
+#game-screen .game-info label {
+    display : inline-block;
+    height : 1.5em;
+    float : left;
+    font-size : 0.6em;
+    padding : 0.25em;
+}
+
+#game-screen .game-info .score {
+    float : right;
+}
+
+#game-screen .time {
+    height : 0.25em;
+    border-radius : 0.5em;
+}
+
+#game-screen .time .indicator {
+    width : 100%;
+}
+#game-screen .announcement {
+    position : absolute;
+    left: 0;
+    top : 50%;
+    margin-top : -0.5em;
+    width : 100%;
+
+    font-family : Slackey, sans-serif;
+    color : rgb(150,150,75);
+    text-shadow : 0.03em 0.03em 0.03em rgb(255,255,0),
+                 -0.03em -0.03em 0.03em rgb(255,255,0),
+                  0.1em 0.15em 0.15em rgb(0,0,0);
+    text-align : center;
+    white-space : nowrap;
+
+    z-index : 20; /* in front of everything else */
+    opacity : 0; /* start out transparent */
+    cursor : default;
+}
+
+/* Announcement animation */
+/* Keyframes for webkit */
+@-webkit-keyframes zoomfade {
+    0% { opacity : 1; -webkit-transform : scale(0.5); }
+    25% { opacity : 1; }
+    100% { opacity : 0; -webkit-transform : scale(1.5); }
+}
+/* Keyframes for Firefox */
+@-moz-keyframes zoomfade {
+    0% { opacity : 1; -moz-transform : scale(0.5); }
+    25% { opacity : 1; }
+    100% { opacity : 0; -moz-transform : scale(1.5); }
+}
+/* Keyframes for W3C compliant browsers */
+@keyframes zoomfade {
+    0% { opacity : 1; transform : scale(0.5); }
+    25% { opacity : 1; }
+    100% { opacity : 0; transform : scale(1.5); }
+}
+/* zoom-fade animation class */
+.zoomfade {
+    animation-name : zoomfade;
+    animation-duration : 2s;
+    -webkit-animation-name : zoomfade;
+    -webkit-animation-duration : 2s;
+    -moz-animation-name : zoomfade;
+    -moz-animation-duration : 2s;
 }
