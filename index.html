@@ -45,10 +45,17 @@
               jewel.load("scripts/board.js");
             }
             jewel.load("scripts/screen.game.js");
+            jewel.load("scripts/screen.high-scores.js");
             jewel.load("scripts/requestAnimationFrame.js")
-            jewel.load("scripts/display.canvas.js");
+            if (false){
+              jewel.load("scripts/webgl.js");
+              jewel.load("scripts/display.webgl.js");
+            }else{
+              jewel.load("scripts/display.canvas.js");
+            }
             jewel.load("scripts/input.js");
             jewel.load("scripts/audio.js");
+            jewel.load("scripts/storage.js");
           }else{
             jewel.load("scripts/screen.install.js",jewel.setup);
           }
@@ -58,52 +65,56 @@
 
 </head>
 <body>
-  <div id="game">
-    <div class="screen" id="splash-screen">
-      <h1 class="logo">Super Jewel <br/> Bros</h1>
-      <div class="progress">
-        <div class="indicator"></div>
-      </div>
-      <span class="continue">Click to continue </span>
-    </div>
-
-    <div class="screen" id="install-screen">
-      <h1 class="logo">Super Jewel <br/>Bros</h1>
-      <span>
-          Click the <img src="images/install-icon.png"
-                         alt="Install icon">
-          button to install the game to your home screen.
-     </span>
-   </div>
-
-    <div class="screen" id="main-menu">
-      <h3 class="logo">Super Jewel</br> Bros </h3>
-      <ul class="menu">
-        <li><button name="game-screen">Play</button>
-        <li><button name="high-scores">Highscore</button>
-        <li><button name="about">About</button>
-        <li><button name="exit-screen">Exit</button>
-      </ul>
-    </div>
-
-    <div class="screen" id="game-screen">
-      <div class="game-board">
-        <div class="announcement"></div>
-      </div>
-      <div class="game-info">
-        <label class = "level">Level:<span></span></label>
-        <label class = "score">Score:<span></span></label>
-      </div>
-      <div class="time progress"><div class="indicator"></div></div>
-      <footer>
-        <button class="exit">Exit</button>
-        <button class="pause">Pause</button>
-      </footer>
-      <div class="pause-overlay">
-            <div class="pause-text">Pause</div>
+    <div id="game">
+        <div class="screen" id="splash-screen">
+            <h1 class="logo">Super Jewel <br/>Bros</h1>
+            <div class="progress">
+                <div class="indicator"></div>
+            </div>
+            <span class="continue">Click to continue</span>
+        </div>
+        <div class="screen" id="install-screen">
+            <h1 class="logo">Super Jewel <br/>Bros</h1>
+            <span>
+                Click the <img src="images/install-icon.png"
+                               alt="Install icon">
+                button to install the game to your home screen.
+           </span>
+        </div>
+        <div class="screen" id="main-menu">
+            <h2 class="logo">Super Jewel <br/>Bros</h2>
+            <ul class="menu">
+                <li><button name="game-screen">Play</button>
+                <li><button name="high-scores">Highscore</button>
+                <li><button name="about">About</button>
+                <li><button name="exit-screen">Exit</button>
+            </ul>
+        </div>
+        <div class="screen" id="game-screen">
+            <div class="game-board">
+                <div class="announcement"></div>
+            </div>
+            <div class="game-info">
+                <label class="level">Level: <span></span></label>
+                <label class="score">Score: <span></span></label>
+            </div>
+            <div class="time progress"><div class="indicator"></div></div>
+            <footer>
+                <button class="exit">Exit</button>
+                <button class="pause">Pause</button>
+            </footer>
+            <div class="pause-overlay">
+                <div class="pause-text">Pause</div>
+            </div>
+        </div>
+        <div class="screen" id="high-scores">
+            <h2 class="logo">High score</h2>
+            <ol class="score-list">
+            </ol>
+            <footer>
+                <button class="back">Back</button>
+            </footer>
         </div>
     </div>
-    <div class="screen" id="high-scores"></div>
-  </div>
 </body>
 </html>

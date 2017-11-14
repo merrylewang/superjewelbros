@@ -17,17 +17,36 @@ jewel.screens["game-screen"] = (function() {
             startTime : 0, // time at start of level
             endTime : 0 // time to game over
         };
+
+        var activeGame = jewel.storage.get("activeGameData"),
+            useActiveGame,
+            startJewels;
+
+        if (activeGame) {
+            useActiveGame = window.confirm(
+                "Do you want to continue your previous game?"
+            );
+            if (useActiveGame) {
+                var now = Date.now();
+                gameState.level = activeGame.level;
+                gameState.score = activeGame.score;
+                gameState.startTime = now - activeGame.time;
+                gameState.endTime = activeGame.endTime;
+                startJewels = activeGame.jewels;
+            }
+        }
         updateGameInfo();
         jewel.audio.initialize();
-        board.initialize(function() {
+
+        board.initialize(startJewels, function() {
             display.initialize(function() {
-                cursor = {
-                    x : 0,
-                    y : 0,
-                    selected : false
-                };
+                cursor = { x : 0, y : 0, selected : false };
                 display.redraw(board.getBoard(), function() {
-                    advanceLevel();
+                    if (useActiveGame) {
+                        setLevelTimer();
+                    } else {
+                        advanceLevel();
+                    }
                 });
             });
         });
@@ -35,7 +54,6 @@ jewel.screens["game-screen"] = (function() {
         var overlay = jewel.dom.$("#game-screen .pause-overlay")[0];
         overlay.style.display = "none";
     }
-
     function updateGameInfo() {
         var $ = jewel.dom.$;
         $("#game-screen .score span")[0].innerHTML =
@@ -43,6 +61,7 @@ jewel.screens["game-screen"] = (function() {
         $("#game-screen .level span")[0].innerHTML =
             gameState.level;
     }
+
 
 
     function setLevelTimer(reset) {
@@ -76,7 +95,6 @@ jewel.screens["game-screen"] = (function() {
         cursor.selected = select;
         jewel.display.setCursor(x, y, select);
     }
-
     function selectJewel(x, y) {
         if (paused) {
             return;
@@ -107,6 +125,7 @@ jewel.screens["game-screen"] = (function() {
         }
     }
 
+
     function playBoardEvents(events) {
         var display = jewel.display;
         if (events.length > 0) {
@@ -119,7 +138,7 @@ jewel.screens["game-screen"] = (function() {
                     display.moveJewels(boardEvent.data, next);
                     break;
                 case "remove" :
-                    jewel.audio.play("match")
+                    jewel.audio.play("match");
                     display.removeJewels(boardEvent.data, next);
                     break;
                 case "refill" :
@@ -131,9 +150,9 @@ jewel.screens["game-screen"] = (function() {
                     next();
                     break;
                 case "badswap" :
-                  jewel.audio.play("badswap");
-                  next();
-                  break;
+                    jewel.audio.play("badswap");
+                    next();
+                    break;
                 default :
                     next();
                     break;
@@ -146,9 +165,14 @@ jewel.screens["game-screen"] = (function() {
     }
 
     function gameOver() {
-      jewel.audio.play("gameover")
+        jewel.audio.play("gameover");
+        jewel.storage.set("lastScore", gameState.score);
+        jewel.storage.set("activeGameData", null);
         jewel.display.gameOver(function() {
             announce("Game over");
+            setTimeout(function() {
+                jewel.showScreen("high-scores");
+            }, 2500);
         });
     }
 
@@ -166,7 +190,7 @@ jewel.screens["game-screen"] = (function() {
     }
 
     function advanceLevel() {
-        jewel.audio.play("levelup")
+        jewel.audio.play("levelup");
         gameState.level++;
         announce("Level " + gameState.level);
         updateGameInfo();
@@ -208,19 +232,6 @@ jewel.screens["game-screen"] = (function() {
         console.log("Cursor position: " + x + ", " + y);
     }
 
-    function pauseGame() {
-        if (paused) {
-            return; // do nothing if already paused
-        }
-        var dom = jewel.dom,
-            overlay = dom.$("#game-screen .pause-overlay")[0];
-        overlay.style.display = "block";
-        paused = true;
-        pauseStart = Date.now();
-        clearTimeout(gameState.timer);
-        jewel.display.pause();
-    }
-
     function moveUp() {
         moveCursor(0, -1);
     }
@@ -237,6 +248,19 @@ jewel.screens["game-screen"] = (function() {
         moveCursor(1, 0);
     }
 
+    function pauseGame() {
+        if (paused) {
+            return; // do nothing if already paused
+        }
+        var dom = jewel.dom,
+            overlay = dom.$("#game-screen .pause-overlay")[0];
+        overlay.style.display = "block";
+        paused = true;
+        pauseStart = Date.now();
+        clearTimeout(gameState.timer);
+        jewel.display.pause();
+    }
+
     function resumeGame() {
         var dom = jewel.dom,
             overlay = dom.$("#game-screen .pause-overlay")[0];
@@ -248,12 +272,24 @@ jewel.screens["game-screen"] = (function() {
         jewel.display.resume(pauseTime);
     }
 
+    function saveGameData() {
+        jewel.storage.set("activeGameData", {
+            level : gameState.level,
+            score : gameState.score,
+            time : Date.now() - gameState.startTime,
+            endTime : gameState.endTime,
+            jewels : jewel.board.getBoard()
+        });
+    }
+
     function exitGame() {
         pauseGame();
         var confirmed = window.confirm(
             "Do you want to return to the main menu?"
         );
         if (confirmed) {
+            clearTimeout(gameState.timer);
+            saveGameData();
             jewel.showScreen("main-menu");
         } else {
             resumeGame();
