@@ -51,12 +51,15 @@ body {
 
 #splash-screen {
     text-align : center;
-    padding-top : 2.5em;
+    padding-top : 3em;
 }
 #splash-screen .continue {
     cursor : pointer;
     font-size : 0.75em;
     display : none;
+}
+#splash-screen .indicator{
+  padding-bottom: 1.0em;
 }
 
 /* Progress bar */
@@ -92,12 +95,12 @@ body {
     font-family : Slackey;
     font-size : 1.5em;
     line-height : 0.9em;
-    text-shadow : 0.03em  0.03em  0.03em rgb(255,255,0),
-                 -0.03em -0.03em  0.03em rgb(255,255,0),
+    text-shadow : 0.03em  0.03em  0.03em rgb(255,0,0),
+                 -0.03em -0.03em  0.03em rgb(255,0,0),
                   0.10em  0.15em  0.15em rgb(0,0,0);
     margin : 0;
     text-align : center;
-    color : rgb(70,120,20);
+    color : rgb(0,0,255);
 }
 
 /* Main menu styles */
@@ -112,7 +115,7 @@ ul.menu {
     list-style : none;
 }
 ul.menu li {
-    margin : 0.5em 0;
+    margin : 1em 0;
 }
 ul.menu li button {
     font-family : Slackey, sans-serif;
@@ -180,10 +183,10 @@ ul.menu li button:active {
     margin-top : 50%;
     font-family : Slackey;
     font-size : 1.0em;
-    text-shadow : 0.03em  0.03em  0.03em rgb(255,255,0),
-                 -0.03em -0.03em  0.03em rgb(255,255,0),
+    text-shadow : 0.03em  0.03em  0.03em rgb(255,0,0),
+                 -0.03em -0.03em  0.03em rgb(255,0,0),
                   0.10em  0.15em  0.15em rgb(0,0,0);
-    color : rgb(70,120,20);
+    color : rgb(0,0,255);
 }
 
 .screen footer {
@@ -212,6 +215,10 @@ ul.menu li button:active {
 #game-screen footer button.pause {
     float: right;
 }
+#game-screen .game-info{
+  width: 100%;
+  float: left;
+}
 #game-screen .game-info label {
     display : inline-block;
     height : 1.5em;
@@ -227,6 +234,7 @@ ul.menu li button:active {
 #game-screen .time {
     height : 0.25em;
     border-radius : 0.5em;
+    width: 7em;
 }
 
 #game-screen .time .indicator {
@@ -240,7 +248,7 @@ ul.menu li button:active {
     width : 100%;
 
     font-family : Slackey, sans-serif;
-    color : rgb(150,150,75);
+    color : rgb(0,0,255);
     text-shadow : 0.03em 0.03em 0.03em rgb(255,255,0),
                  -0.03em -0.03em 0.03em rgb(255,255,0),
                   0.1em 0.15em 0.15em rgb(0,0,0);
@@ -303,5 +311,20 @@ ul.menu li button:active {
     text-align : center;
 }
 #high-scores footer button.back {
+    float: left;
+}
+
+/* About */
+#about h2 {
+    margin-top : 0.25em;
+    font-size : 1.25em;
+}
+#about p {
+  font-size: 0.75em;
+  text-align: left;
+  display: inline-block;
+}
+
+#about footer button.back {
     float: left;
 }

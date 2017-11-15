@@ -4,7 +4,7 @@ var jewel = (function() {
         cols : 8,
         baseScore : 100,
         baseLevelScore : 1500,
-        baseLevelExp : 1.03,
+        baseLevelExp : 1.05,
         baseLevelTimer : 60000,
         numJewelTypes : 7,
         controls : {

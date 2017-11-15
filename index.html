@@ -1,6 +1,9 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
 <head>
+  <audio autoplay="autoplay" loop="loop" number="0.5">
+      <source src="sounds/start.mp3" type="audio/mpeg">
+  </audio>
     <meta charset = "UTF-8">
     <meta name="viewport" content="width=device-width,user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
@@ -46,7 +49,8 @@
             }
             jewel.load("scripts/screen.game.js");
             jewel.load("scripts/screen.high-scores.js");
-            jewel.load("scripts/requestAnimationFrame.js")
+            jewel.load("scripts/screen.about.js");
+            jewel.load("scripts/requestAnimationFrame.js");
             if (false){
               jewel.load("scripts/webgl.js");
               jewel.load("scripts/display.webgl.js");
@@ -87,9 +91,9 @@
                 <li><button name="game-screen">Play</button>
                 <li><button name="high-scores">Highscore</button>
                 <li><button name="about">About</button>
-                <li><button name="exit-screen">Exit</button>
             </ul>
         </div>
+
         <div class="screen" id="game-screen">
             <div class="game-board">
                 <div class="announcement"></div>
@@ -107,6 +111,7 @@
                 <div class="pause-text">Pause</div>
             </div>
         </div>
+
         <div class="screen" id="high-scores">
             <h2 class="logo">High score</h2>
             <ol class="score-list">
@@ -114,6 +119,16 @@
             <footer>
                 <button class="back">Back</button>
             </footer>
+        </div>
+
+        <div class="screen" id="about">
+          <h2 class="logo">About</h2>
+          <p> Super Jewel Bros was created by Merryle Wang. Images and music are all property of Nintendo.
+            This was just a personal project, but I hope many people will play it. <br><br>My high score is 17500.
+          </p>
+          <footer>
+            <button class="back">Back</button>
+          </footer>
         </div>
     </div>
 </body>

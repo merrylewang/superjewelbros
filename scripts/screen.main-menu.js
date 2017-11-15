@@ -8,6 +8,7 @@ jewel.screens["main-menu"] = (function() {
                 var action = e.target.getAttribute("name");
                 jewel.showScreen(action);
             }
+
         });
     }
 
