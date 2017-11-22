@@ -61,27 +61,7 @@
             jewel.load("scripts/audio.js");
             jewel.load("scripts/storage.js");
           }else{
-            jewel.load("scripts/screen.splash.js",jewel.setup);
-            jewel.load("scripts/screen.main-menu.js");
-            if(jewel.hasWebWorkers()){
-              jewel.preload("scripts/board.worker.js");
-              jewel.load("scripts/board.worker-interface.js");
-            }else{
-              jewel.load("scripts/board.js");
-            }
-            jewel.load("scripts/screen.game.js");
-            jewel.load("scripts/screen.high-scores.js");
-            jewel.load("scripts/screen.about.js");
-            jewel.load("scripts/requestAnimationFrame.js");
-            if (false){
-              jewel.load("scripts/webgl.js");
-              jewel.load("scripts/display.webgl.js");
-            }else{
-              jewel.load("scripts/display.canvas.js");
-            }
-            jewel.load("scripts/input.js");
-            jewel.load("scripts/audio.js");
-            jewel.load("scripts/storage.js");
+            jewel.load("scripts/screen.install.js",jewel.setup);
           }
 
         });
