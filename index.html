@@ -23,7 +23,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="144x144"
           href="images/ios-icon-ipad-retina.png"/>
 
-    <!-- Put in quick load images in wanted to<link rel="apple-touch-startup-image"
+    <!-- Put in quick load images in if  wanted to<link rel="apple-touch-startup-image"
           href="images/ios-startup-748x1024.png"
           media="screen and (min-device-width: 768px)
                         and (orientation:landscape)" />
@@ -38,7 +38,7 @@
     <script>
         window.addEventListener("load", function(){
           jewel.load("scripts/dom.js");
-          if(jewel.isStandalone()){
+
             jewel.load("scripts/screen.splash.js",jewel.setup);
             jewel.load("scripts/screen.main-menu.js");
             if(jewel.hasWebWorkers()){
@@ -60,9 +60,7 @@
             jewel.load("scripts/input.js");
             jewel.load("scripts/audio.js");
             jewel.load("scripts/storage.js");
-          }else{
-            jewel.load("scripts/screen.install.js",jewel.setup);
-          }
+
 
         });
     </script>
