@@ -1,4 +1,5 @@
 jewel.dom = (function() {
+  
 
     function $(path, parent) {
         parent = parent || document;
