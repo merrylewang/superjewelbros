@@ -44,7 +44,7 @@ jewel.dom = (function() {
         addClass : addClass,
         removeClass : removeClass,
         bind : bind,
-        transform : transform
+        transform: transform
 
     };
 })();
