@@ -4,16 +4,17 @@
   <audio autoplay="autoplay" loop="loop" number="0.5">
       <source src="sounds/start.mp3" type="audio/mpeg">
   </audio>
-    <meta charset = "UTF-8">
-    <meta name="viewport" content="width=device-width,user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <title>Super Jewel Bros</title>
-    <link rel="stylesheet" href="styles/main.css"/>
-    <link rel="stylesheet" href="styles/fontfaces.css"/>
-    <link rel="stylesheet" href="styles/mobiles.css"
-          media="screen and (max-device-width: 768px) and (orientation:portrait),
-                screen and (max-device-width: 1024px) and (orientation:landscape)"/>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/fontfaces.css" />
+    <link rel="stylesheet" href="styles/mobile.css"
+          media="screen and (max-device-width: 768px) and (orientation: portrait),
+                 screen and (max-device-width: 1024px) and (orientation: landscape)"/>
     <link rel="apple-touch-icon-precomposed"
           href="images/ios-icon.png"/>
     <link rel="apple-touch-icon-precomposed" sizes="72x72"
@@ -36,33 +37,32 @@
           media="screen and (max-device-width:320px)"/>
     <script src="scripts/jewel.js"></script>
     <script>
-        window.addEventListener("load", function(){
-          jewel.load("scripts/dom.js");
-          if(jewel.isStandalone()){
-            jewel.load("scripts/screen.splash.js",jewel.setup);
-            jewel.load("scripts/screen.main-menu.js");
-            if(jewel.hasWebWorkers()){
-              jewel.preload("scripts/board.worker.js");
-              jewel.load("scripts/board.worker-interface.js");
-            }else{
-              jewel.load("scripts/board.js");
+       window.addEventListener("load", function() {
+            jewel.load("scripts/dom.js");
+            if (jewel.isStandalone()) {
+                jewel.load("scripts/screen.splash.js", jewel.setup);
+                jewel.load("scripts/screen.main-menu.js");
+                if (jewel.hasWebWorkers()) {
+                    jewel.preload("scripts/board.worker.js");
+                    jewel.load("scripts/board.worker-interface.js");
+                } else {
+                    jewel.load("scripts/board.js");
+                }
+                jewel.load("scripts/screen.game.js");
+                jewel.load("scripts/screen.high-scores.js");
+                jewel.load("scripts/requestAnimationFrame.js");
+                if (false) {
+                    jewel.load("scripts/webgl.js");
+                    jewel.load("scripts/display.webgl.js");
+                } else {
+                    jewel.load("scripts/display.canvas.js");
+                }
+                jewel.load("scripts/input.js");
+                jewel.load("scripts/audio.js");
+                jewel.load("scripts/storage.js");
+            } else {
+                jewel.load("scripts/screen.install.js", jewel.setup);
             }
-            jewel.load("scripts/screen.game.js");
-            jewel.load("scripts/screen.high-scores.js");
-            jewel.load("scripts/screen.about.js");
-            jewel.load("scripts/requestAnimationFrame.js");
-            if (false){
-              jewel.load("scripts/webgl.js");
-              jewel.load("scripts/display.webgl.js");
-            }else{
-              jewel.load("scripts/display.canvas.js");
-            }
-            jewel.load("scripts/input.js");
-            jewel.load("scripts/audio.js");
-            jewel.load("scripts/storage.js");
-          }else{
-            jewel.load("scripts/screen.install.js",jewel.setup);
-          }
 
         });
     </script>
