@@ -23,7 +23,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="144x144"
           href="images/ios-icon-ipad-retina.png"/>
 
-    <!-- Put in quick load images in if  wanted to<link rel="apple-touch-startup-image"
+    <link rel="apple-touch-startup-image"
           href="images/ios-startup-748x1024.png"
           media="screen and (min-device-width: 768px)
                         and (orientation:landscape)" />
@@ -33,7 +33,7 @@
                         and (orientation:portrait)" />
     <link rel="apple-touch-startup-image"
           href="images/ios-startup-320x460.png"
-          media="screen and (max-device-width:320px)"/> -->
+          media="screen and (max-device-width:320px)"/>
     <script src="scripts/jewel.js"></script>
     <script>
         window.addEventListener("load", function(){
@@ -51,7 +51,7 @@
             jewel.load("scripts/screen.high-scores.js");
             jewel.load("scripts/screen.about.js");
             jewel.load("scripts/requestAnimationFrame.js");
-            if (false){
+            if (jewel.hasWebGL()){
               jewel.load("scripts/webgl.js");
               jewel.load("scripts/display.webgl.js");
             }else{
@@ -124,7 +124,7 @@
         <div class="screen" id="about">
           <h2 class="logo">About</h2>
           <p> Super Jewel Bros was created by Merryle Wang. Images and music are all property of Nintendo.
-            This was just a personal project, but I hope many people will play it. <br><br>My high score is 17500.
+            This was just a personal project, but I hope many people will play it. <br><br>My high score is 24300.
           </p>
           <footer>
             <button class="back">Back</button>
